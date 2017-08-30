@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/template-web.js"></script>
+</head>
+<body>
+	<div id="odiv"></div>
+	<script type="text/html" id="tpl-user">
+		<h1>{{aa.name}}</h1>
+		循环
+		<ul>
+			{{each arr}}
+			<li>{{$index}}:{{$value | filter}}</li>
+			{{/each}}
+		</ul>
+		<div>{{p}}</div>
+		<!-- 解析html标签需要加# -->
+		<div>{{#p}}</div>
+	</script>
+	<script type="text/javascript">
+		var data={
+			aa:{
+				name:'dhy'
+			},
+			arr:[1,1,1,2,223,23,,5,2,1,1],
+			p:'<p>这是个P标签</p>'
+		} 
+		var html = template('tpl-user',data);
+		document.getElementById('odiv').innerHTML=html;
+		//添加了过滤器
+		function filter(val){
+			if(val<10){
+				return val+'0'
+			}
+			return val
+		}
+	</script>
+</body>
+</html>
